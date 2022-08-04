@@ -11,7 +11,6 @@ public class RegistrationForm {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = "[aA-zZ]+[aA-zZ ]*[aA-zZ]+")
     private String name;
 
     @NotNull

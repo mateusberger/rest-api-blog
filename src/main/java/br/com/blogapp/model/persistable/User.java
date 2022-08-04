@@ -1,5 +1,7 @@
 package br.com.blogapp.model.persistable;
 
+import br.com.blogapp.model.constant.Role;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -41,11 +43,15 @@ public class User {
 
     private LocalDate creation;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public void addRole(Role role){
-        roles.add(role);
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Long getId() {

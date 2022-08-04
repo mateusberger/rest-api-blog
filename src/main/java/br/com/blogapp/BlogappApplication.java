@@ -11,25 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Optional;
 
 @SpringBootApplication
-public class BlogappApplication implements CommandLineRunner {
+public class BlogappApplication {
 
 	@Autowired
 	private UserRepository userRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BlogappApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-
-		User user = new User();
-
-		user.setName("Admin");
-		user.setEmail("admin@admin.com");
-		user.setPassword("admin");
-
-		userRepo.save(user);
-
 	}
 }
