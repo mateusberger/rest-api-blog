@@ -1,11 +1,16 @@
 package br.com.blogapp.model.form;
 
+import br.com.blogapp.model.persistable.Author;
+import br.com.blogapp.model.persistable.SocialMedia;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AuthorForm {
 
@@ -25,6 +30,20 @@ public class AuthorForm {
 
     @Valid
     private List<SocialMediaForm> socialMedias = new ArrayList<>();
+
+    public Author toAuthor(){
+        Author author = new Author();
+        author.setName(this.authorName);
+        author.setShortBio(this.shortBio);
+        author.setFullBio(this.fullBio);
+        List<SocialMedia> socialM = socialMedias
+                .stream()
+                .map(SocialMediaForm::toSocialMedia)
+                .collect(Collectors.toList());
+
+        author.setSocialMedias(socialM);
+        return author;
+    }
 
     public void addSocialMedia(@Valid SocialMediaForm socialMedia){
         if (socialMedias == null){
